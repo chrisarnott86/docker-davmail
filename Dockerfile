@@ -1,5 +1,8 @@
 FROM openjdk:8-jre-alpine
 
+ARG KEYSTOREPASS=password
+ENV INT_KEYSTOREPASS=$KEYSTOREPASS
+
 MAINTAINER jberrenberg v5.3.1
 
 ADD https://downloads.sourceforge.net/project/davmail/davmail/5.3.1/davmail-5.3.1-3079.zip /tmp/davmail.zip
@@ -11,7 +14,7 @@ RUN adduser davmail -D && \
   mkdir /var/log/davmail && \
   chown davmail:davmail /var/log/davmail -R && \
   mkdir /etc/davmailcerts && \ 
-  keytool -genkey -keyalg rsa -keysize 2048 -storepass password -keystore /etc/davmailcerts/davmail.p12 -storetype \
+  keytool -genkey -keyalg rsa -keysize 2048 -storepass ${KEYSTOREPASS} -keystore /etc/davmailcerts/davmail.p12 -storetype \
   pkcs12 -validity 3650 -dname cn=davmail.stir.ac.uk,ou=davmail,o=sf,o=net
 
 VOLUME        /etc/davmail
