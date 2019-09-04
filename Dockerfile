@@ -9,7 +9,10 @@ RUN adduser davmail -D && \
   unzip -q /tmp/davmail.zip -d /usr/local/davmail && \
   rm /tmp/davmail.zip && \
   mkdir /var/log/davmail && \
-  chown davmail:davmail /var/log/davmail -R 
+  chown davmail:davmail /var/log/davmail -R && \
+  mkdir /etc/davmailcerts && \ 
+  keytool -genkey -keyalg rsa -keysize 2048 -storepass password -keystore /etc/davmailcerts/davmail.p12 -storetype \
+  pkcs12 -validity 3650 -dname cn=davmail.stir.ac.uk,ou=davmail,o=sf,o=net
 
 VOLUME        /etc/davmail
 
