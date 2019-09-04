@@ -19,8 +19,8 @@ docker run -v ${DAVMAIL_CONF}:/etc/davmail/davmail.properties jberrenberg/davmai
 
 The following ports are exposed by the container:
 
-* caldav: 1080
-* imap: 1143
-* ldap: 1389
-* pop: 1110
-* smtp: 1025
+* caldav: 1443
+* imap: 1993
+* ldap: 1636
+* pop: 1995
+* smtp: 1465
