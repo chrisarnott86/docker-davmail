@@ -16,11 +16,11 @@ RUN adduser davmail -D && \
 
 VOLUME        /etc/davmail
 
-EXPOSE        1080
-EXPOSE        1143
-EXPOSE        1389
-EXPOSE        1110
-EXPOSE        1025
+EXPOSE        443
+EXPOSE        993
+EXPOSE        636
+EXPOSE        995
+EXPOSE        465
 WORKDIR       /usr/local/davmail
 
 USER davmail
