@@ -7,6 +7,8 @@ MAINTAINER jberrenberg v5.3.1
 
 ADD https://downloads.sourceforge.net/project/davmail/davmail/5.3.1/davmail-5.3.1-3079.zip /tmp/davmail.zip
 
+VOLUME        /etc/davmail
+
 RUN adduser davmail -D && \
   mkdir /usr/local/davmail && \
   unzip -q /tmp/davmail.zip -d /usr/local/davmail && \
@@ -19,7 +21,6 @@ RUN adduser davmail -D && \
   sed -i "s/davmail.ssl.keyPass=password/davmail.ssl.keyPass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties && \
   sed -i "s/davmail.ssl.keystorePass=password/davmail.ssl.keystorePass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties
 
-VOLUME        /etc/davmail
 
 EXPOSE        1443
 EXPOSE        1993
