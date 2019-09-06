@@ -4,7 +4,7 @@ ARG KEYSTOREPASS=password
 ENV INT_KEYSTOREPASS=$KEYSTOREPASS
 
 ARG KEYSTOREFILE=/etc/davmailcerts/davmail.p12
-ENV INT_KEYSTOREPASS=$KEYSTOREPASS
+ENV INT_KEYSTOREFILE=$KEYSTOREFILE
 
 MAINTAINER jberrenberg v5.3.1
 
@@ -22,6 +22,7 @@ RUN adduser davmail -D && \
   mkdir /etc/davmailcerts && \ 
   keytool -genkey -keyalg rsa -keysize 2048 -storepass ${INT_KEYSTOREPASS} -keystore ${INT_KEYSTOREPASS} -storetype \
   pkcs12 -validity 3650 -dname cn=davmail.stir.ac.uk,ou=davmail,o=sf,o=net && \
+  sed -i "s/davmail.ssl.keystoreFile=/davmail.ssl.keystoreFile=${INT_KEYSTOREFILE}/" /etc/davmail/davmail.properties && \
   sed -i "s/davmail.ssl.keyPass=/davmail.ssl.keyPass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties && \
   sed -i "s/davmail.ssl.keystorePass=/davmail.ssl.keystorePass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties
 
