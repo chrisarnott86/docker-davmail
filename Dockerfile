@@ -18,6 +18,7 @@ RUN adduser davmail -D && \
   rm /tmp/davmail.zip && \
   mkdir /var/log/davmail && \
   chown davmail:davmail /var/log/davmail -R && \
+  chown davmail:davmail /etc/davmail/davmail.properties -R && \
   mkdir /etc/davmailcerts && \ 
   keytool -genkey -keyalg rsa -keysize 2048 -storepass ${INT_KEYSTOREPASS} -keystore ${INT_KEYSTOREPASS} -storetype \
   pkcs12 -validity 3650 -dname cn=davmail.stir.ac.uk,ou=davmail,o=sf,o=net && \
