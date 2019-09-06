@@ -7,7 +7,7 @@ MAINTAINER jberrenberg v5.3.1
 
 ADD https://downloads.sourceforge.net/project/davmail/davmail/5.3.1/davmail-5.3.1-3079.zip /tmp/davmail.zip
 
-VOLUME        /etc/davmail
+ADD https://raw.githubusercontent.com/chrisarnott86/docker-davmail/master/davmail.properties /etc/davmail/davmail.properties
 
 RUN adduser davmail -D && \
   mkdir /usr/local/davmail && \
@@ -18,8 +18,8 @@ RUN adduser davmail -D && \
   mkdir /etc/davmailcerts && \ 
   keytool -genkey -keyalg rsa -keysize 2048 -storepass ${INT_KEYSTOREPASS} -keystore /etc/davmailcerts/davmail.p12 -storetype \
   pkcs12 -validity 3650 -dname cn=davmail.stir.ac.uk,ou=davmail,o=sf,o=net && \
-  sed -i "s/davmail.ssl.keyPass=password/davmail.ssl.keyPass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties && \
-  sed -i "s/davmail.ssl.keystorePass=password/davmail.ssl.keystorePass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties
+  sed -i "s/davmail.ssl.keyPass=/davmail.ssl.keyPass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties && \
+  sed -i "s/davmail.ssl.keystorePass=/davmail.ssl.keystorePass=${INT_KEYSTOREPASS}/" /etc/davmail/davmail.properties
 
 
 EXPOSE        1443
