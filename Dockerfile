@@ -16,7 +16,8 @@ RUN adduser davmail -D && \
   chown davmail:davmail /var/log/davmail -R && \
   chown -R davmail:davmail /etc/davmail && \
   chown davmail:davmail /etc/davmail/davmail.properties -R && \
-  mkdir /etc/davmailcerts
+  mkdir /etc/davmailcerts && \
+  chown -R davmail:davmail /etc/davmailcerts
 
 
 COPY startup.sh /usr/local/davmail/
