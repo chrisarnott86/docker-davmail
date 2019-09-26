@@ -8,9 +8,12 @@ ADD https://raw.githubusercontent.com/chrisarnott86/docker-davmail/master/davmai
 
 
 
-RUN adduser davmail -D && \
+RUN apk add curl && \
+  apk add openssl && \
+  adduser davmail -D && \
   mkdir /usr/local/davmail && \
   unzip -q /tmp/davmail.zip -d /usr/local/davmail && \
+  sed -i 's/-Xmx512M/-Xmx128M/' /usr/local/davmail/davmail && \
   rm /tmp/davmail.zip && \
   mkdir /var/log/davmail && \
   chown davmail:davmail /var/log/davmail -R && \
@@ -18,6 +21,9 @@ RUN adduser davmail -D && \
   chown davmail:davmail /etc/davmail/davmail.properties -R && \
   mkdir /etc/davmailcerts && \
   chown -R davmail:davmail /etc/davmailcerts
+
+ADD fullchain.pem /etc/davmailcerts/
+ADD privkey.pem /etc/davmailcerts/
 
 
 COPY startup.sh /usr/local/davmail/
